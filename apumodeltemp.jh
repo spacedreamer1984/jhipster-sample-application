@@ -1,0 +1,48 @@
+entity Card {
+	cardId Integer,
+	cardNumber String,
+    active Boolean
+}
+
+entity UserRole {
+	userRoleId Integer,
+	description String
+}
+
+entity SystemUser {
+	userId Integer,
+	firstName String,
+    secondName String,
+    phoneNumber String,
+    email String,
+    password String,
+    active Boolean
+}
+
+relationship OneToMany {
+	SystemUser{card} to Card
+}
+
+relationship ManyToMany {
+	SystemUser{userRole} to UserRole{systemUser}
+}
+
+entity Device {
+	deviceId Integer,
+    deviceNumber Integer,
+    lastPacketId Integer,
+    active Boolean
+}
+
+entity Rule {
+	ruleId Integer,
+    dateBegin Date,
+    dateEnd Date,
+    active Boolean
+}
+
+relationship ManyToOne {
+	Rule{card} to Card,
+    Rule{device} to Device
+}
+
